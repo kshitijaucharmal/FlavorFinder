@@ -95,12 +95,8 @@
     <header>
         <h1>Flavor Finder</h1>
         <nav>
-            <a href="#">Home</a>
-            <a href="#">Explore Flavors</a>
-            <a href="#">Top Picks</a>
-            <a href="#">Recipes</a>
-            <a href="#">About Us</a>
-            <a href="#">Contact</a>
+            <a href="/">Home</a>
+            <a href="/accounts/food-data">Food data</a>
         </nav>
         {% if user.is_authenticated %}
             Hi {{ user.username }}!
@@ -121,25 +117,6 @@
             <input type="text" placeholder="What flavor are you looking for?" name="search">
             <button type="submit" class="cta-button">Search</button>
         </form>
-    </section>
-
-    <section class="featured">
-        <h2>Discover Popular Flavors</h2>
-        <div class="flavor-grid">
-            <div class="flavor-item">
-                <img src="https://example.com/szechuan.jpg" alt="Spicy Szechuan">
-                <p>Spicy Szechuan</p>
-            </div>
-            <div class="flavor-item">
-                <img src="https://example.com/lemon.jpg" alt="Tangy Lemon Zest">
-                <p>Tangy Lemon Zest</p>
-            </div>
-            <div class="flavor-item">
-                <img src="https://example.com/chipotle.jpg" alt="Smoky Chipotle">
-                <p>Smoky Chipotle</p>
-            </div>
-        </div>
-        <a href="#" class="cta-button">Explore All Flavors</a>
     </section>
 
     {% endblock %}
