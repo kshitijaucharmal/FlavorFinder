@@ -1,16 +1,148 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover unique flavors, recipes, and culinary experiences with Flavor Finder.">
+    <title>Flavor Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        header {
+            background-color: #ff6f61;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .hero {
+            background-image: url('https://example.com/hero-image.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .hero h1 {
+            font-size: 3em;
+        }
+        .hero p {
+            font-size: 1.5em;
+        }
+        .cta-button {
+            background-color: #ff6f61;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .featured {
+            padding: 50px;
+            text-align: center;
+        }
+        .featured h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .flavor-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .flavor-item {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 150px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .flavor-item img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        footer a {
+            color: #ff6f61;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    {% extends "base.html" %}
+    {% block content %}
+    <header>
+        <h1>Flavor Finder</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Explore Flavors</a>
+            <a href="#">Top Picks</a>
+            <a href="#">Recipes</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
+        </nav>
+        {% if user.is_authenticated %}
+            Hi {{ user.username }}!
+            <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit">Log Out</button>
+            </form>
+        {% else %}
+            <p>You are not logged in</p>
+            <a href="{% url 'login' %}">Log In</a>
+        {% endif %}
+    </header>
 
-{% block title %}Home{% endblock %}
+    <section class="hero">
+        <h1>Uncover the World's Best Flavors</h1>
+        <p>Find unique tastes, delicious recipes, and hidden gems from all over the globe.</p>
+        <form action="/search" method="get">
+            <input type="text" placeholder="What flavor are you looking for?" name="search">
+            <button type="submit" class="cta-button">Search</button>
+        </form>
+    </section>
 
-{% block content %}
-{% if user.is_authenticated %}
-Hi {{ user.username }}!
-<form action="{% url 'logout' %}" method="post">
-  {% csrf_token %}
-  <button type="submit">Log Out</button>
-</form>
-{% else %}
-<p>You are not logged in</p>
-<a href="{% url 'login' %}">Log In</a>
-{% endif %}
-{% endblock %}
+    <section class="featured">
+        <h2>Discover Popular Flavors</h2>
+        <div class="flavor-grid">
+            <div class="flavor-item">
+                <img src="https://example.com/szechuan.jpg" alt="Spicy Szechuan">
+                <p>Spicy Szechuan</p>
+            </div>
+            <div class="flavor-item">
+                <img src="https://example.com/lemon.jpg" alt="Tangy Lemon Zest">
+                <p>Tangy Lemon Zest</p>
+            </div>
+            <div class="flavor-item">
+                <img src="https://example.com/chipotle.jpg" alt="Smoky Chipotle">
+                <p>Smoky Chipotle</p>
+            </div>
+        </div>
+        <a href="#" class="cta-button">Explore All Flavors</a>
+    </section>
+
+    {% endblock %}
+</body>
+</html>
+
