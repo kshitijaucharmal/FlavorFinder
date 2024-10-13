@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Data List - Flavor Finder</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        header {
+            background-color: #ff6347; /* Tomato color */
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .search-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .search-container input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-container button {
+            padding: 10px;
+            background-color: #ff6347; /* Tomato color */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .search-container button:hover {
+            background-color: #e5533d; /* Darker tomato color */
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+            width: 20%;  /* Set fixed width for columns */
+            height: 100px; /* Set fixed height for rows */
+            overflow: hidden; /* Hide overflowing content */
+            text-overflow: ellipsis; /* Show ellipsis for overflowing text */
+            white-space: nowrap; /* Prevent line breaks */
+            position: relative; /* For positioning expanded content */
+        }
+        th {
+            background-color: #ff6347; /* Tomato color */
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ffebee; /* Light tomato color */
+        }
+        footer {
+            background-color: #ff6347; /* Tomato color */
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .pagination {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .pagination a {
+            margin: 0 5px;
+            text-decoration: none;
+            padding: 10px;
+            border: 1px solid #ddd;
+            color: #ff6347;
+        }
+        .pagination .active {
+            background-color: #ff6347;
+            color: white;
+            border: 1px solid #ff6347;
+        }
+        .expandable-content {
+            display: none; /* Hide expandable content by default */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            border: 1px solid #ddd;
+            z-index: 1;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease; /* Smooth transition for expansion */
+            opacity: 0; /* Start as invisible */
+            height: auto; /* Allow height to adjust */
+            max-height: 0; /* Start with height 0 for smooth expansion */
+            overflow: hidden; /* Hide overflow */
+        }
+        .expandable-content.visible {
+            display: block; /* Show when expanded */
+            opacity: 1; /* Fade in */
+            max-height: 300px; /* Set a reasonable max height */
+        }
+        .expandable {
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function toggleExpand(element) {
+            const content = element.querySelector('.expandable-content');
+            content.classList.toggle('visible');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Flavor Finder</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/food-data/">Food Data</a>
+            <a href="/login/">Login</a>
+            <a href="/signup/">Sign Up</a>
+        </nav>
+    </header>
+    
+    <main>
+        <h2 style="text-align: center;">Food Data List</h2>
+        
+        <!-- Search Form -->
+        <div class="search-container">
+            <form method="GET" action="{% url 'food_data_list' %}"> <!-- Make sure to adjust the URL name accordingly -->
+                <input type="text" name="q" placeholder="Search by Title..." value="{{ request.GET.q }}">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        
+        <table>
+            <tr>
+                <th>Serial No</th>
+                <th>Title</th>
+                <th>Instructions</th>
+                <th>Image Name</th>
+                <th>Cleaned Ingredients</th>
+            </tr>
+            {% for food in page_obj %}
+            <tr>
+                <td>{{ food.SerialNo }}</td>
+                <td>{{ food.Title }}</td>
+                <td class="expandable" onclick="toggleExpand(this)">
+                    <span>{{ food.Instructions|slice:":50" }}...</span> <!-- Show first 50 characters -->
+                    <div class="expandable-content">
+                        <ol class="instruction-list">
+                            {% for instruction in food.instructions_list %}
+                                {% if instruction.strip %}
+                                    <li>{{ instruction.strip }}</li> <!-- Remove extra spaces -->
+                                {% endif %}
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </td>
+                <td>{{ food.Image_Name }}</td>
+                <td class="expandable" onclick="toggleExpand(this)">
+                    <span>{{ food.Cleaned_Ingredients|slice:":50" }}...</span> <!-- Show first 50 characters -->
+                    <div class="expandable-content">
+                        <ul class="ingredient-list">
+                            {% for ingredient in food.cleaned_ingredients_list %}
+                                {% if ingredient.strip %}
+                                    <li>{{ ingredient.strip }}</li> <!-- Remove extra spaces -->
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">First</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+            {% endif %}
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Flavor Finder. All rights reserved.</p>
+    </footer>
+</body>
+</html>
