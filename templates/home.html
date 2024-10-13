@@ -13,18 +13,18 @@
     <header>
         <h1>Flavor Finder</h1>
         <nav>
-            <a href="/">Home</a>
-            <a href="/accounts/food-data">Food data</a>
+            <a href="/" class="nav-button">Home</a>
+            <a href="/accounts/food-data" class="nav-button">Food Data</a>
         </nav>
         {% if user.is_authenticated %}
             Hi {{ user.username }}!
             <form action="{% url 'logout' %}" method="post">
-              {% csrf_token %}
-              <button type="submit">Log Out</button>
+                {% csrf_token %}
+                <button type="submit" class="nav-button">Log Out</button>
             </form>
         {% else %}
             <p>You are not logged in</p>
-            <a href="{% url 'login' %}">Log In</a>
+            <a href="{% url 'login' %}" class="nav-button">Log In</a>
         {% endif %}
     </header>
 
@@ -36,8 +36,6 @@
             <button type="submit" class="cta-button">Search</button>
         </form>
     </section>
-
     {% endblock %}
 </body>
 </html>
-

@@ -1,33 +1,80 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lilita One", sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f8f8f8;
 }
+
 header {
+    font-family: "Lilita One", sans-serif;
     background-color: #ff6347; /* Tomato color */
     color: white;
-    padding: 10px 20px;
+    padding: 20px;
     text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 h1 {
     margin: 0;
 }
+
 nav {
     margin-top: 10px;
 }
-nav a {
+
+.nav-button {
+    font-family: "Lilita One", sans-serif;
+    display: inline-block;
+    background-color: #ff8560; /* Light tomato */
     color: white;
-    margin: 0 15px;
+    padding: 10px 20px;
+    margin: 0 10px;
     text-decoration: none;
-    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s; /* Transition for hover effects */
 }
+
+.nav-button:hover {
+    background-color: #ff6347; /* Darker tomato on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.search-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.search-container input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.search-container button {
+    font-family: "Lilita One", sans-serif;
+    padding: 10px;
+    background-color: #ff6347; /* Tomato color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+}
+
+.search-container button:hover {
+    background-color: #e5533d; /* Darker tomato color */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
 table {
     width: 80%;
     margin: 20px auto;
     border-collapse: collapse;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
 th, td {
     padding: 12px 15px;
     border: 1px solid #ddd;
@@ -39,16 +86,20 @@ th, td {
     white-space: nowrap; /* Prevent line breaks */
     position: relative; /* For positioning expanded content */
 }
+
 th {
     background-color: #ff6347; /* Tomato color */
     color: white;
 }
+
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
+
 tr:hover {
     background-color: #ffebee; /* Light tomato color */
 }
+
 footer {
     background-color: #ff6347; /* Tomato color */
     color: white;
@@ -58,44 +109,55 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
 .pagination {
     text-align: center;
     margin: 20px 0;
 }
+
 .pagination a {
     margin: 0 5px;
-    text-decoration: none;
     padding: 10px;
     border: 1px solid #ddd;
     color: #ff6347;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s; /* Transition for hover effects */
 }
+
+.pagination a:hover {
+    background-color: #ff8560; /* Lighter shade on hover */
+}
+
 .pagination .active {
     background-color: #ff6347;
     color: white;
     border: 1px solid #ff6347;
 }
+
 .expandable-content {
     display: none; /* Hide expandable content by default */
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: white; border: 1px solid #ddd;
+    background: white;
+    border: 1px solid #ddd;
     z-index: 1;
     padding: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    overflow: auto; /* Enable scrolling for overflow */
     transition: all 0.3s ease; /* Smooth transition for expansion */
     opacity: 0; /* Start as invisible */
-    height: 0; /* Start with height 0 */
+    max-height: 0; /* Start with height 0 for smooth expansion */
     overflow: hidden; /* Hide overflow */
 }
+
 .expandable-content.visible {
     display: block; /* Show when expanded */
     opacity: 1; /* Fade in */
-    height: auto; /* Allow height to adjust */
+    max-height: 300px; /* Set a reasonable max height */
 }
+
 .expandable {
     cursor: pointer;
 }
@@ -107,53 +169,124 @@ footer {
     text-align: center;
     padding: 80px 20px;
 }
+
 .hero h1 {
     font-size: 3em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
+
 .hero p {
     font-size: 1.5em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
+
 .cta-button {
     background-color: #ff6f61;
     color: white;
-    padding: 10px 20px;
+    padding: 12px 24px;
     text-decoration: none;
     font-size: 1.2em;
     border-radius: 5px;
     display: inline-block;
+    transition: background-color 0.3s, transform 0.2s;
 }
-.featured {
-    padding: 50px;
-    text-align: center;
+
+.cta-button:hover {
+    background-color: #ff8560;
+    transform: translateY(-2px);
 }
-.featured h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    animation: fadeIn 0.3s; /* Fade-in animation */
 }
-.flavor-grid {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-.flavor-item {
-    background-color: white;
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
-    border-radius: 10px;
-    width: 150px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.5s; /* Slide-in animation */
 }
-.flavor-item img {
-    max-width: 100%;
-    border-radius: 10px;
+
+/* Title and Body Font Sizes */
+#modal-title {
+    font-size: 24px; /* Increased size for title */
+    margin-bottom: 10px;
 }
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 50px;
+
+#modal-body {
+    font-size: 24px; /* Increased size for content */
 }
-footer a {
-    color: #ff6f61;
+
+/* Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.close:hover,
+.close:focus {
+    color: black;
     text-decoration: none;
+    cursor: pointer;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+    transition: background-color 0.3s; /* Smooth background color transition */
+    font-size: 24px; /* Set a base font size for table cells */
+}
+
+td {
+    cursor: pointer; /* Show pointer when hovering over cells */
+}
+
+td:hover {
+    background-color: #ffebee; /* Light tomato color on hover */
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
