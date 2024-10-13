@@ -1,102 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="{% static 'flavor_finder/css/styles.css' %}">
-    <title>Food Data List - Flavor Finder</title>
-    <script>
-        function openModal(title, content) {
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-body').innerText = content;
-            document.getElementById('myModal').style.display = "block";
-        }
-
-        function closeModal() {
-            document.getElementById('myModal').style.display = "none";
-        }
-
-        // Close the modal when clicking outside of it
-        window.onclick = function(event) {
-            const modal = document.getElementById('myModal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-    </script>
-</head>
-<body>
-    <header>
-        <h1>Flavor Finder</h1>
-        <nav>
-            <a href="/" class="nav-button">Home</a>
-            <a href="/accounts/login/" class="nav-button">Login</a>
-            <a href="/accounts/signup/" class="nav-button">Sign Up</a>
-        </nav>
-    </header>
-    
-    <main>
-        <h2 style="text-align: center;">Food Data List</h2>
-
-        <!-- Table Structure -->
-        <table>
-            <tr>
-                <th>Title</th>
-                <th>Instructions</th>
-                <th>Cleaned Ingredients</th>
-                <th>Actions</th> <!-- Added Actions column -->
-            </tr>
-            
-            {% for food in page_obj %}
-            <tr>
-                <td>{{ food.Title }}</td>
-                <td onclick="openModal('{{ food.Title }}', '{{ food.Instructions|escapejs }}')" style="cursor: pointer;">
-                    <span>{{ food.Instructions|slice:":50" }}...</span>
-                </td>
-                <td onclick="openModal('{{ food.Title }}', '{{ food.Cleaned_Ingredients|escapejs }}')" style="cursor: pointer;">
-                    <span>{{ food.Cleaned_Ingredients|slice:":50" }}...</span>
-                </td>
-                <td>
-                        Hello
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-
-        <!-- Modal Structure -->
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h2 id="modal-title"></h2>
-                <p id="modal-body"></p>
-            </div>
-        </div>
-
-        <div class="pagination">
-            {% if page_obj.has_previous %}
-                <a href="?page=1">First</a>
-                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
-            {% endif %}
-
-            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-            {% endif %}
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Flavor Finder. All rights reserved.</p>
-    </footer>
-</body>
 </html><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,8 +49,8 @@
             <tr>
                 <th>Title</th>
                 <th>Instructions</th>
-                <th>Cleaned Ingredients</th>
-                <th>Actions</th> <!-- Added Actions column -->
+                <th>Ingredients</th>
+                <th>Actions</th>
             </tr>
             
             {% for food in page_obj %}
@@ -160,6 +61,15 @@
                 </td>
                 <td onclick="openModal('{{ food.Title }}', '{{ food.Cleaned_Ingredients|escapejs }}')" style="cursor: pointer;">
                     <span>{{ food.Cleaned_Ingredients|slice:":50" }}...</span>
+                </td>
+                <td>
+                    <!-- Update Button -->
+                    <a href="/" class="nav-button">Update</a>
+                    <!-- Delete Button -->
+                    <form method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="nav-button">Delete</button>
+                    </form>
                 </td>
             </tr>
             {% endfor %}
