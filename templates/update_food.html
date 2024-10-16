@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Food Item</title>
+</head>
+<body>
+    <h2>Update Food Item</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="{{ food_item.Title }}" required><br>
+
+        <label for="instructions">Instructions:</label>
+        <textarea id="instructions" name="instructions" required>{{ food_item.Instructions }}</textarea><br>
+
+        <label for="cleaned_ingredients">Cleaned Ingredients:</label>
+        <textarea id="cleaned_ingredients" name="cleaned_ingredients">{{ food_item.Cleaned_Ingredients }}</textarea><br>
+
+        <button type="submit">Update Food Item</button>
+    </form>
+    <a href="{% url 'food_data_list' %}">Back to Food List</a>  <!-- Link back to food list -->
+</body>
+</html>

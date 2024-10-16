@@ -40,13 +40,17 @@
             <a href="/accounts/signup/" class="nav-button">Sign Up</a>
         </nav>
     </header>
-    
     <main>
         <h2 style="text-align: center;">Food Data List</h2>
+        <form method="get" action="{% url 'search_food_item' %}" align="center">
+            <input type="text" name="search" value="{{ search_query }}" placeholder="Search for food...">
+            <button class="nav-button" type="submit">Search</button>
+        </form>
 
         <!-- Table Structure -->
         <table>
             <tr>
+                <th>Number</th>
                 <th>Title</th>
                 <th>Instructions</th>
                 <th>Ingredients</th>
@@ -55,6 +59,7 @@
             
             {% for food in page_obj %}
             <tr>
+                <td>{{ food.SerialNo }}</td>
                 <td>{{ food.Title }}</td>
                 <td onclick="openModal('{{ food.Title }}', '{{ food.Instructions|escapejs }}')" style="cursor: pointer;">
                     <span>{{ food.Instructions|slice:":50" }}...</span>
@@ -63,10 +68,8 @@
                     <span>{{ food.Cleaned_Ingredients|slice:":50" }}...</span>
                 </td>
                 <td>
-                    <!-- Update Button -->
-                    <a href="/" class="nav-button">Update</a>
-                    <!-- Delete Button -->
-                    <form method="post" style="display: inline;">
+                    <a href="{% url 'update_food' food.SerialNo %}" class="nav-button">Update</a>
+                    <form action="{% url 'delete_food' food.SerialNo %}" style="display: inline;">
                         {% csrf_token %}
                         <button type="submit" class="nav-button">Delete</button>
                     </form>
@@ -99,8 +102,5 @@
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Flavor Finder. All rights reserved.</p>
-    </footer>
 </body>
 </html>
