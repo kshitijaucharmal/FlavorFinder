@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+      font-family: "Afacad Flux", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: <weight>;
+      font-style: normal;
+      font-variation-settings:
+        "slnt" 0;
+    color: #ffffff; /* Light text color for better readability */
+}
+
+header {
+    background-color: #333; /* Dark header background */
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+h1 {
+    color: #ff6347; /* Tomato color for heading */
+    margin: 0;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+.nav-button {
+    display: inline-block;
+    background-color: #ff6347; /* Tomato color */
+    color: white;
+    padding: 10px 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.nav-button:hover {
+    background-color: #ff8560; /* Lighter shade on hover */
+}
+
+.hero {
+    background-image: url('https://images.unsplash.com/photo-1530841492851-efc37c5f629c?q=80&w=1750&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Replace with your image URL */
+    background-size: cover; /* Ensure the image covers the entire section */
+    background-position: center; /* Center the image */
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero-content {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better text visibility */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+.hero p {
+    font-size: 1.5em;
+}

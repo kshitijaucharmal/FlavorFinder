@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirm Deletion</title>
+    <link rel="stylesheet" href="{% static 'flavor_finder/css/delete_styles.css' %}">
 </head>
 <body>
     <h2>Are you sure you want to delete "{{ food_item.Title }}"?</h2>

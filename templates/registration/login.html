@@ -1,74 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Login to Flavor Finder and explore unique flavors, recipes, and more.">
     <title>Login | Flavor Finder</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .login-container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-        .login-container h1 {
-            margin-bottom: 30px;
-            color: #ff6f61;
-        }
-        .login-container input[type="text"], .login-container input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1em;
-        }
-        .login-container button {
-            background-color: #ff6f61;
-            color: white;
-            padding: 10px;
-            width: 100%;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2em;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .login-container button:hover {
-            background-color: #e85b50;
-        }
-        .login-container p {
-            margin-top: 20px;
-            font-size: 0.9em;
-        }
-        .login-container p a {
-            color: #ff6f61;
-            text-decoration: none;
-        }
-        .login-container p a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'flavor_finder/css/login_styles.css' %}">
 </head>
 <body>
-
-    {% extends "base.html" %}
-
     {% block content %}
     <div class="login-container">
         <h1>Login to Flavor Finder</h1>

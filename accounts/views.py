@@ -61,7 +61,7 @@ def update_food(request, serial_no):
         food_item.Cleaned_Ingredients = request.POST.get('cleaned_ingredients')  # Update Cleaned_Ingredients
         food_item.save()  # Save the updated record to the database
         messages.success(request, 'Food item updated successfully!')
-        return redirect('food_data_list', serial_no=food_item.SerialNo)  # Redirect to detail view or list
+        return redirect('food_data_list')
 
     return render(request, 'update_food.html', {'food_item': food_item})  # Render update form
 

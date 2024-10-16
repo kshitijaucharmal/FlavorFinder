@@ -7,9 +7,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'flavor_finder/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'flavor_finder/css/list_styles.css' %}">
     <title>Food Data List - Flavor Finder</title>
     <script>
         function openModal(title, content) {
@@ -43,7 +43,7 @@
     <main>
         <h2 style="text-align: center;">Food Data List</h2>
         <form method="get" action="{% url 'search_food_item' %}" align="center">
-            <input type="text" name="search" value="{{ search_query }}" placeholder="Search for food...">
+            <input class="search-input" type="text" name="search" value="{{ search_query }}" placeholder="Search for food...">
             <button class="nav-button" type="submit">Search</button>
         </form>
 

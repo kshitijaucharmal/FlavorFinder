@@ -1,0 +1,70 @@
+body {
+    font-family: "Lilita One", sans-serif; /* Changed font to match theme */
+    margin: 0;
+    padding: 0;
+    background-color: #121212; /* Dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background-color: #333; /* Dark background for the container */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Slightly darker shadow for depth */
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-container h1 {
+    margin-bottom: 30px;
+    color: #ff6347; /* Tomato color for heading */
+}
+
+.login-container input[type="text"], 
+.login-container input[type="password"],
+.login-container input[type="hidden"] { /* Targeting hidden inputs, including CSRF token */
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #444; /* Darker border */
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #222; /* Dark background for input fields */
+    color: #ffffff; /* Light text color */
+}
+
+.login-container button {
+    background-color: #ff6347; /* Tomato color for button */
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.login-container button:hover {
+    background-color: #ff8560; /* Lighter shade on hover */
+}
+
+.login-container p {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #ffffff; /* Light text color for paragraph */
+}
+
+.login-container p a {
+    color: #ff6347; /* Tomato color for links */
+    text-decoration: none;
+}
+
+.login-container p a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
